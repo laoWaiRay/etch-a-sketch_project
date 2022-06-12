@@ -1,0 +1,21 @@
+{
+  "name": "etch-a-sketch_project",
+  "version": "1.0.0",
+  "description": "",
+  "main": "app.js",
+  "scripts": {
+    "watch:sass": "sass --watch main.scss styles.css",
+    "devserver": "live-server",
+    "start": "npm-run-all --parallel devserver watch:sass"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/laoWaiRay/etch-a-sketch_project.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/laoWaiRay/etch-a-sketch_project/issues"
+  },
+  "homepage": "https://github.com/laoWaiRay/etch-a-sketch_project#readme"
+}
