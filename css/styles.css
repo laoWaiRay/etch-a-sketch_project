@@ -44,10 +44,6 @@ h1 {
   background-color: red;
 }
 
-.colorSquare {
-  background-color: red;
-}
-
 .colorPickerInput {
   display: inline-block;
   position: absolute;

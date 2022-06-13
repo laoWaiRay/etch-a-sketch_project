@@ -1,23 +1,9 @@
+const h1 = document.querySelector('h1');
 const grid = document.querySelector('.grid');
 const body = document.querySelector('body');
 const btnReset = document.querySelector('.btnReset');
 const btnClear = document.querySelector('.btnClear');
 
-
-// Changing CSS file directly through DOM
-const stylesheet = document.styleSheets[0];
-let elementRules__squareHover;
-let elementRules__colorSquare;
-
-for(let i = 0; i < stylesheet.cssRules.length; i++) {
-    if(stylesheet.cssRules[i].selectorText === '.square:hover') {
-      elementRules__squareHover = stylesheet.cssRules[i];
-    }
-    if(stylesheet.cssRules[i].selectorText === '.colorSquare') {
-        elementRules__colorSquare = stylesheet.cssRules[i];
-    }
-}
-///////////////////////////////////////////
 
 const makeGrid = function(gridSize){
     for(let i=0; i<gridSize**2; i++){
@@ -40,15 +26,14 @@ const colorPickerInput = document.querySelector('.colorPickerInput')
 
 colorPickerInput.defaultValue = '#ffffff';
 colorPickerInput.value = '#ffffff';
+let currentColor = colorPickerInput.value;
 
-colorPickerInput.onchange = () => {
-    colorPickerLabel.style.backgroundColor = `${colorPickerInput.value}`;
-    console.log('changedvalue');
-    elementRules__squareHover.style.setProperty('background-color',`${colorPickerInput.value}`, 'important');
-    elementRules__colorSquare.style.setProperty('background-color',`${colorPickerInput.value}`, 'important');
+
+colorPickerInput.onchange = (e) => {
+    currentColor = `${colorPickerInput.value}`;
+    colorPickerLabel.style.backgroundColor = currentColor;
+    h1.style.color = currentColor;
 }
-
-
 
 const addSquareEvent = function(){
     const allSquares = document.querySelectorAll('.square');
@@ -64,13 +49,15 @@ const addSquareEvent = function(){
     })
         
     for(square of allSquares){
-        square.addEventListener('mousemove', function(){
+        square.addEventListener('mousemove', function(e){
             if(mouseActive === true) {
-                this.classList.add('colorSquare');
+                console.log(e.target)
+                e.target.style.backgroundColor = currentColor;
             }
         })
-        square.addEventListener('mousedown', function(){
-            this.classList.add('colorSquare');
+        square.addEventListener('mousedown', function(e){
+            console.log(e.target)
+            e.target.style.backgroundColor = currentColor;
         })
     }
 }
@@ -97,7 +84,7 @@ btnReset.addEventListener('click', () => {
 btnClear.addEventListener('click', ()=>{
     const allSquares = document.querySelectorAll('.square');
     for (square of allSquares){
-        square.classList.remove('colorSquare');
+        square.style.backgroundColor = '';
     }
 })
 
