@@ -8,6 +8,8 @@
 
 html {
   font-size: 62.5%;
+  font-family: Arial, Helvetica, sans-serif;
+  text-align: center;
 }
 
 body {
@@ -35,7 +37,7 @@ h1 {
 .square {
   width: 100%;
   height: 100%;
-  background-color: #28b485;
+  background-color: rgb(163, 159, 159);
 }
 
 .square:hover {
@@ -47,7 +49,9 @@ h1 {
 }
 
 .colorPickerInput {
-  display: none;
+  display: inline-block;
+  position: absolute;
+  opacity: 0;
 }
 
 .colorPickerLabel {
@@ -56,8 +60,11 @@ h1 {
   width: 3rem;
   background-color: red;
   border-radius: 100000px;
-  margin-left: 2rem;
-  margin-right: 1rem;
+  margin: 0 1rem;
+  z-index: 10;
+}
+.colorPickerLabel:hover {
+  cursor: pointer;
 }
 
 .menu {

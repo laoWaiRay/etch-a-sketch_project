@@ -3,14 +3,29 @@ const body = document.querySelector('body');
 const btnReset = document.querySelector('.btnReset');
 const btnClear = document.querySelector('.btnClear');
 
+
+// Changing CSS file directly through DOM
+const stylesheet = document.styleSheets[0];
+let elementRules__squareHover;
+let elementRules__colorSquare;
+
+for(let i = 0; i < stylesheet.cssRules.length; i++) {
+    if(stylesheet.cssRules[i].selectorText === '.square:hover') {
+      elementRules__squareHover = stylesheet.cssRules[i];
+    }
+    if(stylesheet.cssRules[i].selectorText === '.colorSquare') {
+        elementRules__colorSquare = stylesheet.cssRules[i];
+    }
+}
+///////////////////////////////////////////
+
 const makeGrid = function(gridSize){
     for(let i=0; i<gridSize**2; i++){
         grid.style.gridTemplateColumns = `repeat(${gridSize}, 1fr)`;
         grid.style.gridTemplateRows = `repeat(${gridSize}, 1fr)`;
         const tile = document.createElement('div');
         tile.classList.add('square');
-        grid.append(tile);
-        
+        grid.append(tile);  
     }
 }
 
@@ -18,6 +33,22 @@ let gridSize = prompt('Enter a grid size:');
 while(gridSize>100){
     gridSize = prompt('Please enter a grid size less than 100:')
 }
+
+const colorPickerLabel = document.querySelector('.colorPickerLabel')
+const colorPickerInput = document.querySelector('.colorPickerInput')
+
+
+colorPickerInput.defaultValue = '#ffffff';
+colorPickerInput.value = '#ffffff';
+
+colorPickerInput.onchange = () => {
+    colorPickerLabel.style.backgroundColor = `${colorPickerInput.value}`;
+    console.log('changedvalue');
+    elementRules__squareHover.style.setProperty('background-color',`${colorPickerInput.value}`, 'important');
+    elementRules__colorSquare.style.setProperty('background-color',`${colorPickerInput.value}`, 'important');
+}
+
+
 
 const addSquareEvent = function(){
     const allSquares = document.querySelectorAll('.square');
@@ -69,19 +100,4 @@ btnClear.addEventListener('click', ()=>{
         square.classList.remove('colorSquare');
     }
 })
-
-
-// for(let i=0; i<gridSize**2; i++){
-//     document.querySelector(`.grid .square:nth-child(9)`).addEventListener('click', () => {
-//         document.querySelector(`.grid .square:nth-child(4)`).style.backgroundColor = 'red';
-//     })
-//     console.log(`The index is ${i}`)
-// }
-
-
-
-// square.addEventListener('click' () => {
-//     console.log('You clicked me!')
-// })
-
 
